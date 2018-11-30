@@ -1,0 +1,29 @@
+---
+- name: stat
+  hosts: nodes
+  remote_user: ubuntu
+  become_method: sudo
+  tasks:
+
+    - name: install do407
+      apt:
+        name: do407
+        state: latest
+      ignore_errors: yes
+      register: do407
+  
+    - debug: msg='Error in installing'
+      when: do407|failed
+
+    - name: start do407
+      service:
+        name: do407
+        state: started
+      ignore_errors: yes
+      register: do407service
+
+    - debug: msg='Error in starting'
+      when: do407service|failed
+
+    - debug: msg='Installtion failed'
+      when: do407|failed and do407|failed
