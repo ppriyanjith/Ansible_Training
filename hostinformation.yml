@@ -1,0 +1,11 @@
+---
+- name: host infoamtion
+  hosts: node1
+  remote_user: ubuntu
+  become_method: sudo
+  tasks:
+   
+    - name: host ofnamation
+      copy:
+        content: "{{ansible_hostname}} {{ansible_processor_cores}} {{ansible_default_ipv4.address}} {{ansible_default_ipv4.macaddress}}"
+        dest: /var/www/html/file.html
