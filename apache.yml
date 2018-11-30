@@ -1,0 +1,32 @@
+---
+- name: apache
+  hosts: nodes
+  tasks:
+  
+
+    - name: install apache
+      apt:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - apache2
+
+    - name: start service
+      service:
+        name: "{{item}}"
+      with_items:
+        - apache2
+
+    - name: copy index file
+      get_url:
+         url: http://localhost/myindex.html
+         dest: /var/www/html/index.html
+
+    - name: replace whole content of the file
+      copy: 
+        content: 'This messege is from {{ansible_hostname}}'
+        dest: /var/www/html/index.html
+ 
+
+   
+        
