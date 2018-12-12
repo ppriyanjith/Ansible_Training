@@ -1,0 +1,15 @@
+---
+- name: replece
+  hosts: nodes
+  remote_user: ubuntu
+  become_method: sudo
+  tasks:
+
+
+    - name: download file
+      get_url:
+        url: http://172.31.94.52:80/httpd.conf
+        dest: /var/www/html/httpd.conf
+
+    - name: replace
+      replace: dest=/var/www/html/httpd.conf regexp='None' replace='All' backup=yes
