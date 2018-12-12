@@ -1,0 +1,29 @@
+---
+- name: tar file 
+  hosts: localhost
+  tasks:
+  
+    - name: create tar file
+      command:
+        "{{item}}"
+      with_items:
+        -  tar -czvf /tmp/test1.gz /var/www/html/index.html
+        -  tar -czvf /tmp/test2.gz  /var/www/html/myindex.html
+
+- name: tar file
+  hosts: nodes
+  remote_user: ubuntu
+  become_method: sudo
+  tasks:
+ 
+    - name: copy files to server1 
+      copy:
+        src: /tmp/test1.gz
+        dest: /tmp
+      when: inventory_hostname in groups['taggroup1']
+  
+    - name: copy files to server2
+      copy:
+        src: /tmp/test2.gz
+        dest: /tmp
+      when: inventory_hostname in groups['taggroup2'] 
