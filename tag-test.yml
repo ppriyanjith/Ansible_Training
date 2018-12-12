@@ -1,0 +1,20 @@
+---
+- name: prod backup
+  hosts: nodes
+  remote_user: ubuntu
+  become_method: sudo
+  tasks:
+
+    - name: copy to server 1
+      copy:
+        src: /var/www/html/prodfile.txt
+        dest: /tmp
+      tags: production
+      when: inventory_hostname in groups['production']
+
+    - name: copy to server 2
+      copy:
+        src: /var/www/html/backfile.txt
+        dest: /tmp
+      tags: backup
+      when: inventory_hostname in groups['backup']
