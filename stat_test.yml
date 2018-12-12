@@ -1,0 +1,17 @@
+---
+- name: stat
+  hosts: nodes
+  remote_user: ubuntu
+  become_method: sudo
+  tasks:
+
+    - name: stats file
+      stat:
+        path: /tmp/stsfile.sh
+      register: ststfile
+
+    - name: copy file
+      copy:
+        src: /tmp/stsfile.sh
+        dest: /tmp/stsfile.sh
+      when: ststfile.stat.exists == 0
