@@ -1,0 +1,25 @@
+---
+staff:
+  - 'balla'
+  - 'kirimalli'
+  - 'huta'
+  - 'ammatahudu'
+
+guestusers:
+  - 'walmima'
+  - 'salamda'
+  - 'polbatta'
+  - 'waliba'
+  - 'galibba'
+
+works:
+  - 'my3'
+  - 'ranil'
+  - 'mahinda'
+  - 'vimal'
+  - 'jeewaka'
+
+remove_list:
+  - 'my3'
+  - 'waliba'
+  - 'ammatahudu'

@@ -1,0 +1,30 @@
+---
+- name: users
+  hosts: nodes
+  remote_user: devops
+  become_method: sudo
+  vars_files:
+    - roles/student.bash_env/vars/main.yml
+  tasks:
+  
+    - name: add groups
+      group: name="{{item}}" state=present
+      with_items:
+        - 'staff'
+        - 'guests'
+        - 'workers' 
+
+    - name: add users
+      user: name="{{item}}" shell=/bin/bash groups=staff,workers append=yes 
+      with_items:
+        - "{{staff}}"
+
+    - name: add users
+      user: name="{{item}}" shell=/bin/bash groups=guests,workers append=yes     
+      with_items:
+        - "{{guestusers}}"
+
+    - name: delete user
+      user: name="{{item}}" state=absent remove=yes 
+      with_items:
+        - "{{remove_list}}"
