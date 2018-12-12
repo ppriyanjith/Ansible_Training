@@ -1,0 +1,15 @@
+---
+- name: block and rescue
+  hosts: nodes
+  remote_user: ubuntu
+  become_method: sudo
+  tasks:
+  
+    - block:
+        - name: get url 
+          get_url: 
+            url: http://localhost:80/index.html
+            #url: www.google.com/ack
+            dest: /tmp
+      rescue:
+        - debug: msg='this installtion is failed'
