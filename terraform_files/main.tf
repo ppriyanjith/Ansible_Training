@@ -13,7 +13,7 @@ resource "aws_instance" "my-instance" {
   #user_data     = "${file("install_ansible.sh")}"
 
   tags = {
-    Name  = "ANSIBLE-Padma-Test${count.index + 1}"
+    Name  = "ANSIBLE-<Your Name>-Test${count.index + 1}"
     t_AppID = "SVC01944"
     t_dcl = "2"
     t_cost_centre = "10.695.74172.79943.0000.3"
